@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+  <style>
+        li {
+      margin-left: 15px;
+    }
+  </style>
+</head>
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ event.name }}</h1>
+  <p> <i>{{ event.description }}</i></p>
+
+    <h3>Event Members and Total Amount Spent</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Member Name</th>
+        <th>Total Amount Spent</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for member, total_amount_spent in event_members.items %}
+        <tr>
+          <td>{{ member }}</td>
+          <td>{{ total_amount_spent }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h5><b>Expenses</b></h5>
+    {% if expense_list %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Expense Name</th>
+                    <th>Amount</th>
+                    <th>Users</th>
+                    <th>Categories</th>  <!-- New column for categories -->
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in expense_list %}
+                    <tr>
+                        <td>{{ expense.name }}</td>
+                        <td>{{ expense.amount }}</td>
+                        <td>
+                            <ul>
+                              {% for payment in expense.expensepayment_set.all %}
+                                <li>{{ payment.user.username }} - {{ payment.portion }}</li>
+                              {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            {{ expense.category.name }}
+                        </td>
+                        <td>
+                            <a href="{% url 'edit_expense' event_slug=event.slug expense_id=expense.id %}" class="btn">Edit</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>There are currently no related expenses. <a href="{% url 'create_expense' event_slug=event.slug %}">Click here to begin adding</a></p>
+    {% endif %}
+
+    <a href="{% url 'create_expense' event_slug=event.slug %}" class="btn">Add Expense</a>
+{% endblock %}

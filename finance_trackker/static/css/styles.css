@@ -1,0 +1,82 @@
+@import url('https://fonts.google.com/specimen/Karla?query=karla')
+
+/* GENERAL */
+html {
+    font-family: 'Karla';
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* ?? TBH IDK */
+form ul li.category {
+  display: inline-block;
+  background-color: white;
+  padding: 5px 10px;
+  margin-right: 5px;
+}
+
+/* SIDEBAR */
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.sidebar {
+  background-color: #426E92;
+  width: 200px;
+  padding: 10px;
+  font-size: 20px;
+  font-color: white;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-top: 40px;
+  margin-left: 20px;
+}
+
+.sidebar li a {
+  text-decoration: none;
+  color: white;
+}
+
+.sidebar li a:hover {
+  color: #DBD2AF;
+}
+
+/* EVENT LIST */
+.noevent-wrapper {
+    margin-top: 100px;
+    padding: 80px 0px;
+    border: 4px solid #9e9e9e;
+    border-style: dashed;
+}
+
+.noevent-wrapper h3 {
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
+/* ALERTS */
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+
+/* Add this to your CSS file */
+.portion-toggle {
+  margin-right: 10px; /* Optional: Add some spacing between the buttons */
+}

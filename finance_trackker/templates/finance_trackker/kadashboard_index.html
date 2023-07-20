@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+<head>
+    <title> KaDashboard </title>
+</head>
+{% block content %}
+    <h1> KaDashboard </h1>
+
+    {% if event_list %}
+    <table>
+        <thead>
+            <tr>
+                <th>Event Name</th>
+                <th>Description</th>
+                <th>Total Spent</th>
+                <th>Members</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in event_list %}
+                <tr>
+                    <td><a href="{% url 'event_detail' event_slug=event.slug %}">{{ event.name }}</a></td>
+                    <td>{{ event.description.strip }}</td>
+                    <td>${{ event.total_expense_amount }}</td>
+                    <td>
+                        <ul>
+                            {% for expense in event.expense_set.all %}
+                                {% for payment in expense.expensepayment_set.all %}
+                                    <li>{{ payment.user.first_name }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <div class="container">
+        <div class="noevent-wrapper center">
+            <h3 class="grey-text">Add an event to get started!</h3>
+            <a href="/kada_shboard/create_event" class="btn-large grey">
+                <i class="material-icons white-text left">add_circle</i>
+                <span class="bold">Add Events</span>
+            </a>
+        </div>
+    </div>
+{% endif %}
+
+
+{% endblock %}
